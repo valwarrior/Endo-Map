@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c262ab8aa30ec38066f7ef8148256a31 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_c262ab8aa30ec38066f7ef8148256a31" ></div>
+        
+    
+<style>
+  #map-controls {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    font-family: Arial, sans-serif;
+  }
+  #map-controls input {
+    margin-top: 6px;
+    width: 160px;
+    padding: 4px;
+    font-size: 14px;
+  }
+</style>
+<div id="map-controls">
+  <strong>Map Legend</strong><br>
+  🟣 Endometriosis Surgeon<br>
+  🔵 Pelvic Physiotherapist<br><br>
+  <label for="provinceInput">Filter by Province:</label><br>
+  <input type="text" id="provinceInput" placeholder="e.g. ON, BC..." onkeyup="filterMarkers()">
+</div>
+
+<script>
+function filterMarkers() {
+  var input = document.getElementById('provinceInput').value.toUpperCase();
+  var allPopups = document.querySelectorAll('.leaflet-popup-content');
+
+  allPopups.forEach(popup => {
+    let markerIcon = popup.closest('.leaflet-pane').querySelector('.leaflet-marker-icon');
+    if (!popup.innerHTML.includes(input)) {
+      if (markerIcon) markerIcon.style.display = 'none';
+    } else {
+      if (markerIcon) markerIcon.style.display = 'block';
+    }
+  });
+}
+</script>
+</body>
+<script>
+    
+    
+            var map_c262ab8aa30ec38066f7ef8148256a31 = L.map(
+                "map_c262ab8aa30ec38066f7ef8148256a31",
+                {
+                    center: [56.1304, -106.3468],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 4,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b0fb7f40ae9c39e2f31013f80b1e678f = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_c262ab8aa30ec38066f7ef8148256a31);
+        
+    
+            var marker_cluster_19031744da6ab074d723bf93b7403c42 = L.markerClusterGroup(
+                {}
+            );
+            map_c262ab8aa30ec38066f7ef8148256a31.addLayer(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var marker_b1279935e88ee3a9761de3e3683356a4 = L.marker(
+                [45.4215, -75.6972],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_d77503ad935252538c8a771b7dcbc5f9 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_b1279935e88ee3a9761de3e3683356a4.setIcon(icon_d77503ad935252538c8a771b7dcbc5f9);
+        
+    
+        var popup_47f6eee66c8f3b798fa2022d0999050b = L.popup({"maxWidth": 300});
+
+        
+            var html_eb6b187187c5769ed196bc71390332b6 = $(`<div id="html_eb6b187187c5769ed196bc71390332b6" style="width: 100.0%; height: 100.0%;">     <b>Dr. Sony Singh</b><br>     City: Ottawa, ON<br>     Specialty: Excision<br>     Rating: 4.8⭐<br>     <a href="https://ottawaclinic.ca/sony-singh" target="_blank">More Info</a>     </div>`)[0];
+            popup_47f6eee66c8f3b798fa2022d0999050b.setContent(html_eb6b187187c5769ed196bc71390332b6);
+        
+
+        marker_b1279935e88ee3a9761de3e3683356a4.bindPopup(popup_47f6eee66c8f3b798fa2022d0999050b)
+        ;
+
+        
+    
+    
+            marker_b1279935e88ee3a9761de3e3683356a4.bindTooltip(
+                `<div>
+                     Dr. Sony Singh
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1ab9ad534a0ea31bd9906e1cc29b49c8 = L.marker(
+                [49.2827, -123.1207],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_294f223456985b5e904e4bfc1a0df352 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_1ab9ad534a0ea31bd9906e1cc29b49c8.setIcon(icon_294f223456985b5e904e4bfc1a0df352);
+        
+    
+        var popup_6a9e01dae9e22f4ac17866a95aace064 = L.popup({"maxWidth": 300});
+
+        
+            var html_9179cdf87e0a75297f27b4f12d4d0056 = $(`<div id="html_9179cdf87e0a75297f27b4f12d4d0056" style="width: 100.0%; height: 100.0%;">     <b>Dr. Catherine Allaire</b><br>     City: Vancouver, BC<br>     Specialty: Excision<br>     Rating: 4.6⭐<br>     <a href="https://bcwomens.ca/catherine-allaire" target="_blank">More Info</a>     </div>`)[0];
+            popup_6a9e01dae9e22f4ac17866a95aace064.setContent(html_9179cdf87e0a75297f27b4f12d4d0056);
+        
+
+        marker_1ab9ad534a0ea31bd9906e1cc29b49c8.bindPopup(popup_6a9e01dae9e22f4ac17866a95aace064)
+        ;
+
+        
+    
+    
+            marker_1ab9ad534a0ea31bd9906e1cc29b49c8.bindTooltip(
+                `<div>
+                     Dr. Catherine Allaire
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2cce579ba9d373e7ed32cc2f54a37abf = L.marker(
+                [43.6532, -79.3832],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_3309a3b0c76360859711c9967ab1627f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_2cce579ba9d373e7ed32cc2f54a37abf.setIcon(icon_3309a3b0c76360859711c9967ab1627f);
+        
+    
+        var popup_247b2043c1e9ed9382fab69f4fbc35b2 = L.popup({"maxWidth": 300});
+
+        
+            var html_4d8e6f75cdda267257a98b9fe36b6125 = $(`<div id="html_4d8e6f75cdda267257a98b9fe36b6125" style="width: 100.0%; height: 100.0%;">     <b>Dr. Grace Liu</b><br>     City: Toronto, ON<br>     Specialty: Gynecologic Surgery<br>     Rating: 4.2⭐<br>     <a href="https://womenscollegehospital.ca/grace-liu" target="_blank">More Info</a>     </div>`)[0];
+            popup_247b2043c1e9ed9382fab69f4fbc35b2.setContent(html_4d8e6f75cdda267257a98b9fe36b6125);
+        
+
+        marker_2cce579ba9d373e7ed32cc2f54a37abf.bindPopup(popup_247b2043c1e9ed9382fab69f4fbc35b2)
+        ;
+
+        
+    
+    
+            marker_2cce579ba9d373e7ed32cc2f54a37abf.bindTooltip(
+                `<div>
+                     Dr. Grace Liu
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8cb07be00dc30834aa76d359cfff0d42 = L.marker(
+                [51.0447, -114.0719],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_917f9d6c87634234e40a9c2b9952aa07 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_8cb07be00dc30834aa76d359cfff0d42.setIcon(icon_917f9d6c87634234e40a9c2b9952aa07);
+        
+    
+        var popup_c22cc3e0679dced74456dfeaff0f13d0 = L.popup({"maxWidth": 300});
+
+        
+            var html_5ea96c5c1561b5ed11b9c67bc8d03ab9 = $(`<div id="html_5ea96c5c1561b5ed11b9c67bc8d03ab9" style="width: 100.0%; height: 100.0%;">     <b>Dr. Christina Williams</b><br>     City: Calgary, AB<br>     Specialty: Laparoscopy<br>     Rating: 4.4⭐<br>     <a href="https://calgarygynsurgery.ca/christina-williams" target="_blank">More Info</a>     </div>`)[0];
+            popup_c22cc3e0679dced74456dfeaff0f13d0.setContent(html_5ea96c5c1561b5ed11b9c67bc8d03ab9);
+        
+
+        marker_8cb07be00dc30834aa76d359cfff0d42.bindPopup(popup_c22cc3e0679dced74456dfeaff0f13d0)
+        ;
+
+        
+    
+    
+            marker_8cb07be00dc30834aa76d359cfff0d42.bindTooltip(
+                `<div>
+                     Dr. Christina Williams
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f669f5265348b42654baa760a35bc2e1 = L.marker(
+                [45.5017, -73.5673],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_75647902ab88d01e1981880a181e4969 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_f669f5265348b42654baa760a35bc2e1.setIcon(icon_75647902ab88d01e1981880a181e4969);
+        
+    
+        var popup_a939b98559c6458a795f72be473ae843 = L.popup({"maxWidth": 300});
+
+        
+            var html_765e7b6336d386f6b10520ce8c0ad1db = $(`<div id="html_765e7b6336d386f6b10520ce8c0ad1db" style="width: 100.0%; height: 100.0%;">     <b>Dr. Lucie Chouinard</b><br>     City: Montreal, QC<br>     Specialty: Excision & Pediatric<br>     Rating: 4.7⭐<br>     <a href="https://muhc.ca/lucie-chouinard" target="_blank">More Info</a>     </div>`)[0];
+            popup_a939b98559c6458a795f72be473ae843.setContent(html_765e7b6336d386f6b10520ce8c0ad1db);
+        
+
+        marker_f669f5265348b42654baa760a35bc2e1.bindPopup(popup_a939b98559c6458a795f72be473ae843)
+        ;
+
+        
+    
+    
+            marker_f669f5265348b42654baa760a35bc2e1.bindTooltip(
+                `<div>
+                     Dr. Lucie Chouinard
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7849ec487b84e85e11254c1101bf0d60 = L.marker(
+                [44.6488, -63.5753],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_e812abd50ed59dd3b4f0a0b58d4f5d66 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_7849ec487b84e85e11254c1101bf0d60.setIcon(icon_e812abd50ed59dd3b4f0a0b58d4f5d66);
+        
+    
+        var popup_39400d252d1a39ff3d1e0a9d29153d07 = L.popup({"maxWidth": 300});
+
+        
+            var html_88d4349a762fcbcdac25cf1001f2ef0b = $(`<div id="html_88d4349a762fcbcdac25cf1001f2ef0b" style="width: 100.0%; height: 100.0%;">     <b>Dr. Andrea Simpson</b><br>     City: Halifax, NS<br>     Specialty: Excision<br>     Rating: 4.5⭐<br>     <a href="https://iwk.nshealth.ca/andrea-simpson" target="_blank">More Info</a>     </div>`)[0];
+            popup_39400d252d1a39ff3d1e0a9d29153d07.setContent(html_88d4349a762fcbcdac25cf1001f2ef0b);
+        
+
+        marker_7849ec487b84e85e11254c1101bf0d60.bindPopup(popup_39400d252d1a39ff3d1e0a9d29153d07)
+        ;
+
+        
+    
+    
+            marker_7849ec487b84e85e11254c1101bf0d60.bindTooltip(
+                `<div>
+                     Dr. Andrea Simpson
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_dddc40035673da15bc6cca0aa9d89f5b = L.marker(
+                [49.8951, -97.1384],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_7f8c9179f395913056cbf6789929f2c3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_dddc40035673da15bc6cca0aa9d89f5b.setIcon(icon_7f8c9179f395913056cbf6789929f2c3);
+        
+    
+        var popup_c0b25d20e909bd4e3bdd89283f503a26 = L.popup({"maxWidth": 300});
+
+        
+            var html_cbf21b9242496172ca115e4006d35952 = $(`<div id="html_cbf21b9242496172ca115e4006d35952" style="width: 100.0%; height: 100.0%;">     <b>Dr. Jonathan Barrett</b><br>     City: Winnipeg, MB<br>     Specialty: Laparoscopy<br>     Rating: 4.3⭐<br>     <a href="https://hsc.mb.ca/jonathan-barrett" target="_blank">More Info</a>     </div>`)[0];
+            popup_c0b25d20e909bd4e3bdd89283f503a26.setContent(html_cbf21b9242496172ca115e4006d35952);
+        
+
+        marker_dddc40035673da15bc6cca0aa9d89f5b.bindPopup(popup_c0b25d20e909bd4e3bdd89283f503a26)
+        ;
+
+        
+    
+    
+            marker_dddc40035673da15bc6cca0aa9d89f5b.bindTooltip(
+                `<div>
+                     Dr. Jonathan Barrett
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_40126e4a663f7fe763e04e383e833608 = L.marker(
+                [48.4284, -123.3656],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_999c4c83f8d7b6aa877cad3d995ab60c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_40126e4a663f7fe763e04e383e833608.setIcon(icon_999c4c83f8d7b6aa877cad3d995ab60c);
+        
+    
+        var popup_728a6869adaf53f954b0513189282ade = L.popup({"maxWidth": 300});
+
+        
+            var html_f28d85aeb75fe8cbac188155dac04cfa = $(`<div id="html_f28d85aeb75fe8cbac188155dac04cfa" style="width: 100.0%; height: 100.0%;">     <b>Dr. Meera Patel</b><br>     City: Victoria, BC<br>     Specialty: Gynecologic Surgery<br>     Rating: 4.0⭐<br>     <a href="https://victoriaendo.ca/meera-patel" target="_blank">More Info</a>     </div>`)[0];
+            popup_728a6869adaf53f954b0513189282ade.setContent(html_f28d85aeb75fe8cbac188155dac04cfa);
+        
+
+        marker_40126e4a663f7fe763e04e383e833608.bindPopup(popup_728a6869adaf53f954b0513189282ade)
+        ;
+
+        
+    
+    
+            marker_40126e4a663f7fe763e04e383e833608.bindTooltip(
+                `<div>
+                     Dr. Meera Patel
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8a53405e07e7b5df1de149e390ba05a3 = L.marker(
+                [52.1332, -106.67],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_d156f96c0832d3d03cb5ced749742df0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_8a53405e07e7b5df1de149e390ba05a3.setIcon(icon_d156f96c0832d3d03cb5ced749742df0);
+        
+    
+        var popup_9cde70917cdc49212ac0e11b83434ceb = L.popup({"maxWidth": 300});
+
+        
+            var html_afe078c9d1dee8a522135e2b3337f9f3 = $(`<div id="html_afe078c9d1dee8a522135e2b3337f9f3" style="width: 100.0%; height: 100.0%;">     <b>Dr. Elena Ramos</b><br>     City: Saskatoon, SK<br>     Specialty: Pediatric Gynecology<br>     Rating: 4.4⭐<br>     <a href="https://saskhealth.ca/elena-ramos" target="_blank">More Info</a>     </div>`)[0];
+            popup_9cde70917cdc49212ac0e11b83434ceb.setContent(html_afe078c9d1dee8a522135e2b3337f9f3);
+        
+
+        marker_8a53405e07e7b5df1de149e390ba05a3.bindPopup(popup_9cde70917cdc49212ac0e11b83434ceb)
+        ;
+
+        
+    
+    
+            marker_8a53405e07e7b5df1de149e390ba05a3.bindTooltip(
+                `<div>
+                     Dr. Elena Ramos
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_af622631006c59c19122606bcd8da463 = L.marker(
+                [47.5615, -52.7126],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_3a366dc80a93ec32ee769cb7c942257a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_af622631006c59c19122606bcd8da463.setIcon(icon_3a366dc80a93ec32ee769cb7c942257a);
+        
+    
+        var popup_8e7092b1f09d7e722485b1ffe5de7529 = L.popup({"maxWidth": 300});
+
+        
+            var html_aec64fbf43a604255c6eaa985f22aef0 = $(`<div id="html_aec64fbf43a604255c6eaa985f22aef0" style="width: 100.0%; height: 100.0%;">     <b>Dr. Laura Bennett</b><br>     City: St. John's, NL<br>     Specialty: Advanced Laparoscopy<br>     Rating: 4.2⭐<br>     <a href="https://easternhealth.ca/laura-bennett" target="_blank">More Info</a>     </div>`)[0];
+            popup_8e7092b1f09d7e722485b1ffe5de7529.setContent(html_aec64fbf43a604255c6eaa985f22aef0);
+        
+
+        marker_af622631006c59c19122606bcd8da463.bindPopup(popup_8e7092b1f09d7e722485b1ffe5de7529)
+        ;
+
+        
+    
+    
+            marker_af622631006c59c19122606bcd8da463.bindTooltip(
+                `<div>
+                     Dr. Laura Bennett
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8447087bbbc03efb8f1058fbfc755b40 = L.marker(
+                [48.3809, -89.2477],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_55fecaa737741353892fc4d272808b81 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_8447087bbbc03efb8f1058fbfc755b40.setIcon(icon_55fecaa737741353892fc4d272808b81);
+        
+    
+        var popup_125ac4660b9d1b4f346e5e2acc440cb8 = L.popup({"maxWidth": 300});
+
+        
+            var html_816807147086eca4ce2408aef3d47be4 = $(`<div id="html_816807147086eca4ce2408aef3d47be4" style="width: 100.0%; height: 100.0%;">     <b>Dr. Maria Varga</b><br>     City: Thunder Bay, ON<br>     Specialty: Excision<br>     Rating: 4.1⭐<br>     <a href="https://tbh.ca/maria-varga" target="_blank">More Info</a>     </div>`)[0];
+            popup_125ac4660b9d1b4f346e5e2acc440cb8.setContent(html_816807147086eca4ce2408aef3d47be4);
+        
+
+        marker_8447087bbbc03efb8f1058fbfc755b40.bindPopup(popup_125ac4660b9d1b4f346e5e2acc440cb8)
+        ;
+
+        
+    
+    
+            marker_8447087bbbc03efb8f1058fbfc755b40.bindTooltip(
+                `<div>
+                     Dr. Maria Varga
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b89224c827723240c3beb5a67cc62994 = L.marker(
+                [46.8139, -71.2082],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_86c4baca307ea96c54de7065d332a0af = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_b89224c827723240c3beb5a67cc62994.setIcon(icon_86c4baca307ea96c54de7065d332a0af);
+        
+    
+        var popup_b9f3cfe36c91e05edf686643ec0e77fe = L.popup({"maxWidth": 300});
+
+        
+            var html_514ff32091ca4ebcce255a8295870288 = $(`<div id="html_514ff32091ca4ebcce255a8295870288" style="width: 100.0%; height: 100.0%;">     <b>Dr. Helena Rousseau</b><br>     City: Quebec City, QC<br>     Specialty: Pelvic Pain<br>     Rating: 4.6⭐<br>     <a href="https://chuq.qc.ca/helena-rousseau" target="_blank">More Info</a>     </div>`)[0];
+            popup_b9f3cfe36c91e05edf686643ec0e77fe.setContent(html_514ff32091ca4ebcce255a8295870288);
+        
+
+        marker_b89224c827723240c3beb5a67cc62994.bindPopup(popup_b9f3cfe36c91e05edf686643ec0e77fe)
+        ;
+
+        
+    
+    
+            marker_b89224c827723240c3beb5a67cc62994.bindTooltip(
+                `<div>
+                     Dr. Helena Rousseau
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_970976fa7468dcb3d454455fe689e7ac = L.marker(
+                [50.4452, -104.6189],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_6bc0d67b6c1289176a45e13b02bdcd5d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_970976fa7468dcb3d454455fe689e7ac.setIcon(icon_6bc0d67b6c1289176a45e13b02bdcd5d);
+        
+    
+        var popup_070b6c5b90d13bdf95268c5f2e531ae7 = L.popup({"maxWidth": 300});
+
+        
+            var html_0d938a090575420eea4ef1d13367ee68 = $(`<div id="html_0d938a090575420eea4ef1d13367ee68" style="width: 100.0%; height: 100.0%;">     <b>Dr. Rajiv Khanna</b><br>     City: Regina, SK<br>     Specialty: General Gynecology<br>     Rating: 3.9⭐<br>     <a href="https://rqhealth.ca/rajiv-khanna" target="_blank">More Info</a>     </div>`)[0];
+            popup_070b6c5b90d13bdf95268c5f2e531ae7.setContent(html_0d938a090575420eea4ef1d13367ee68);
+        
+
+        marker_970976fa7468dcb3d454455fe689e7ac.bindPopup(popup_070b6c5b90d13bdf95268c5f2e531ae7)
+        ;
+
+        
+    
+    
+            marker_970976fa7468dcb3d454455fe689e7ac.bindTooltip(
+                `<div>
+                     Dr. Rajiv Khanna
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_dfa60caf4100a5891a58fa442b0f37d8 = L.marker(
+                [46.2382, -63.1311],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_05aa8f6ddbcea1c380a8a77325acc144 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_dfa60caf4100a5891a58fa442b0f37d8.setIcon(icon_05aa8f6ddbcea1c380a8a77325acc144);
+        
+    
+        var popup_f66c1f9ae600d14f84fb482626bfcdc0 = L.popup({"maxWidth": 300});
+
+        
+            var html_f6d00b4ad9c28ad8825880f3f168f4fd = $(`<div id="html_f6d00b4ad9c28ad8825880f3f168f4fd" style="width: 100.0%; height: 100.0%;">     <b>Dr. Nicole Franks</b><br>     City: Charlottetown, PE<br>     Specialty: Endometriosis Care<br>     Rating: 4.7⭐<br>     <a href="https://healthpei.ca/nicole-franks" target="_blank">More Info</a>     </div>`)[0];
+            popup_f66c1f9ae600d14f84fb482626bfcdc0.setContent(html_f6d00b4ad9c28ad8825880f3f168f4fd);
+        
+
+        marker_dfa60caf4100a5891a58fa442b0f37d8.bindPopup(popup_f66c1f9ae600d14f84fb482626bfcdc0)
+        ;
+
+        
+    
+    
+            marker_dfa60caf4100a5891a58fa442b0f37d8.bindTooltip(
+                `<div>
+                     Dr. Nicole Franks
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f3fd7f46c34b1291b1b4aff109e6c3d9 = L.marker(
+                [60.7212, -135.0568],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_fec187368d3a052f85dd94c9699d01c6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_f3fd7f46c34b1291b1b4aff109e6c3d9.setIcon(icon_fec187368d3a052f85dd94c9699d01c6);
+        
+    
+        var popup_748d59f7d207f2b00941bd4211c17975 = L.popup({"maxWidth": 300});
+
+        
+            var html_724448a7d8a60c8562fa52bc8f34ef0a = $(`<div id="html_724448a7d8a60c8562fa52bc8f34ef0a" style="width: 100.0%; height: 100.0%;">     <b>Dr. Ethan Zhao</b><br>     City: Whitehorse, YT<br>     Specialty: Remote Consults<br>     Rating: 4.0⭐<br>     <a href="https://yukonhealth.ca/ethan-zhao" target="_blank">More Info</a>     </div>`)[0];
+            popup_748d59f7d207f2b00941bd4211c17975.setContent(html_724448a7d8a60c8562fa52bc8f34ef0a);
+        
+
+        marker_f3fd7f46c34b1291b1b4aff109e6c3d9.bindPopup(popup_748d59f7d207f2b00941bd4211c17975)
+        ;
+
+        
+    
+    
+            marker_f3fd7f46c34b1291b1b4aff109e6c3d9.bindTooltip(
+                `<div>
+                     Dr. Ethan Zhao
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6636d30a634ba86cef86b0d04c031dfe = L.marker(
+                [63.7467, -68.5167],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_09b43b65f613b00278ef623aed269705 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_6636d30a634ba86cef86b0d04c031dfe.setIcon(icon_09b43b65f613b00278ef623aed269705);
+        
+    
+        var popup_e07bf5a085a77083ccfc20d5ec29bd68 = L.popup({"maxWidth": 300});
+
+        
+            var html_ce3bfd76cc8361276e6634e1c09af40c = $(`<div id="html_ce3bfd76cc8361276e6634e1c09af40c" style="width: 100.0%; height: 100.0%;">     <b>Dr. Caroline Nuuk</b><br>     City: Iqaluit, NU<br>     Specialty: Remote Consults<br>     Rating: 4.1⭐<br>     <a href="https://clinicnunavut.ca/caroline-nuuk" target="_blank">More Info</a>     </div>`)[0];
+            popup_e07bf5a085a77083ccfc20d5ec29bd68.setContent(html_ce3bfd76cc8361276e6634e1c09af40c);
+        
+
+        marker_6636d30a634ba86cef86b0d04c031dfe.bindPopup(popup_e07bf5a085a77083ccfc20d5ec29bd68)
+        ;
+
+        
+    
+    
+            marker_6636d30a634ba86cef86b0d04c031dfe.bindTooltip(
+                `<div>
+                     Dr. Caroline Nuuk
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_102ba57d9ea54e3b66a0ab1c8179b50a = L.marker(
+                [62.454, -114.3718],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_79c3aed070448dfd88da6654c138bf51 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_102ba57d9ea54e3b66a0ab1c8179b50a.setIcon(icon_79c3aed070448dfd88da6654c138bf51);
+        
+    
+        var popup_53d7785ff97fb23c7bc3d3596e99e799 = L.popup({"maxWidth": 300});
+
+        
+            var html_c231d4636655afbb2e3d7af10cbab13d = $(`<div id="html_c231d4636655afbb2e3d7af10cbab13d" style="width: 100.0%; height: 100.0%;">     <b>Dr. Michael Hay</b><br>     City: Yellowknife, NT<br>     Specialty: Gynecologic Surgery<br>     Rating: 4.3⭐<br>     <a href="https://nwtclinic.ca/michael-hay" target="_blank">More Info</a>     </div>`)[0];
+            popup_53d7785ff97fb23c7bc3d3596e99e799.setContent(html_c231d4636655afbb2e3d7af10cbab13d);
+        
+
+        marker_102ba57d9ea54e3b66a0ab1c8179b50a.bindPopup(popup_53d7785ff97fb23c7bc3d3596e99e799)
+        ;
+
+        
+    
+    
+            marker_102ba57d9ea54e3b66a0ab1c8179b50a.bindTooltip(
+                `<div>
+                     Dr. Michael Hay
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_172f616648e5426686a4859c4f04a1ea = L.marker(
+                [43.6532, -79.3832],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_3ec78a2a208e8fc93dafbbf52d0677dd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_172f616648e5426686a4859c4f04a1ea.setIcon(icon_3ec78a2a208e8fc93dafbbf52d0677dd);
+        
+    
+        var popup_eafac99f9ff5eb3e1a279120f1af6591 = L.popup({"maxWidth": 300});
+
+        
+            var html_dd700e538877d3a5268cb2367cf36d34 = $(`<div id="html_dd700e538877d3a5268cb2367cf36d34" style="width: 100.0%; height: 100.0%;">     <b>Dr. Rohan D’Souza</b><br>     City: Toronto, ON<br>     Specialty: MIGS & Excision<br>     Rating: 4.6⭐<br>     <a href="https://mountsinai.on.ca/rohan-dsouza" target="_blank">More Info</a>     </div>`)[0];
+            popup_eafac99f9ff5eb3e1a279120f1af6591.setContent(html_dd700e538877d3a5268cb2367cf36d34);
+        
+
+        marker_172f616648e5426686a4859c4f04a1ea.bindPopup(popup_eafac99f9ff5eb3e1a279120f1af6591)
+        ;
+
+        
+    
+    
+            marker_172f616648e5426686a4859c4f04a1ea.bindTooltip(
+                `<div>
+                     Dr. Rohan D’Souza
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_93ea9bce1b608289e0777165b08f54c0 = L.marker(
+                [43.6532, -79.3832],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_1fe955f5fa26951f8c2a8e5bf05f26ff = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_93ea9bce1b608289e0777165b08f54c0.setIcon(icon_1fe955f5fa26951f8c2a8e5bf05f26ff);
+        
+    
+        var popup_a412ad79cc69c51771aad4e0c31450f7 = L.popup({"maxWidth": 300});
+
+        
+            var html_f20a983b4b90cad205f277d958d9d3ed = $(`<div id="html_f20a983b4b90cad205f277d958d9d3ed" style="width: 100.0%; height: 100.0%;">     <b>Dr. Jennifer Blake</b><br>     City: Toronto, ON<br>     Specialty: Pelvic Pain & Endo<br>     Rating: 4.3⭐<br>     <a href="https://sunnybrook.ca/jennifer-blake" target="_blank">More Info</a>     </div>`)[0];
+            popup_a412ad79cc69c51771aad4e0c31450f7.setContent(html_f20a983b4b90cad205f277d958d9d3ed);
+        
+
+        marker_93ea9bce1b608289e0777165b08f54c0.bindPopup(popup_a412ad79cc69c51771aad4e0c31450f7)
+        ;
+
+        
+    
+    
+            marker_93ea9bce1b608289e0777165b08f54c0.bindTooltip(
+                `<div>
+                     Dr. Jennifer Blake
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_592adc1c2694cb39b8589caef692c299 = L.marker(
+                [43.2557, -79.8711],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_3a3783f62a35e74c388df98490b42bae = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_592adc1c2694cb39b8589caef692c299.setIcon(icon_3a3783f62a35e74c388df98490b42bae);
+        
+    
+        var popup_2cc02b821ed61964730b360b4b6fb6b8 = L.popup({"maxWidth": 300});
+
+        
+            var html_e9fd7d3838ace5ce2035086650def2f1 = $(`<div id="html_e9fd7d3838ace5ce2035086650def2f1" style="width: 100.0%; height: 100.0%;">     <b>Dr. Mathew Leonardi</b><br>     City: Hamilton, ON<br>     Specialty: Excision & Imaging<br>     Rating: 4.8⭐<br>     <a href="https://mcmaster.ca/mathew-leonardi" target="_blank">More Info</a>     </div>`)[0];
+            popup_2cc02b821ed61964730b360b4b6fb6b8.setContent(html_e9fd7d3838ace5ce2035086650def2f1);
+        
+
+        marker_592adc1c2694cb39b8589caef692c299.bindPopup(popup_2cc02b821ed61964730b360b4b6fb6b8)
+        ;
+
+        
+    
+    
+            marker_592adc1c2694cb39b8589caef692c299.bindTooltip(
+                `<div>
+                     Dr. Mathew Leonardi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b1e7fd9ce21d23a884203e595bab2d6e = L.marker(
+                [43.6532, -79.3832],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_70d9c85e9528f2188672b8c490510f16 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_b1e7fd9ce21d23a884203e595bab2d6e.setIcon(icon_70d9c85e9528f2188672b8c490510f16);
+        
+    
+        var popup_5886ca202d5b019c04139c6a23ad5996 = L.popup({"maxWidth": 300});
+
+        
+            var html_e80ccaaf322b4f617fdfc594b9e80394 = $(`<div id="html_e80ccaaf322b4f617fdfc594b9e80394" style="width: 100.0%; height: 100.0%;">     <b>Dr. Ally Murji</b><br>     City: Toronto, ON<br>     Specialty: Complex Gyn Surgery<br>     Rating: 4.4⭐<br>     <a href="https://womenscollegehospital.ca/ally-murji" target="_blank">More Info</a>     </div>`)[0];
+            popup_5886ca202d5b019c04139c6a23ad5996.setContent(html_e80ccaaf322b4f617fdfc594b9e80394);
+        
+
+        marker_b1e7fd9ce21d23a884203e595bab2d6e.bindPopup(popup_5886ca202d5b019c04139c6a23ad5996)
+        ;
+
+        
+    
+    
+            marker_b1e7fd9ce21d23a884203e595bab2d6e.bindTooltip(
+                `<div>
+                     Dr. Ally Murji
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_cabe08ec21630aa3d6c1c07a6318bd41 = L.marker(
+                [49.2827, -123.1207],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_d555c1ecff2b817d8463aaeae7bad98e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_cabe08ec21630aa3d6c1c07a6318bd41.setIcon(icon_d555c1ecff2b817d8463aaeae7bad98e);
+        
+    
+        var popup_062cc27c60decbd89317e0a676e2c5c0 = L.popup({"maxWidth": 300});
+
+        
+            var html_4841149ed8e230844cffa0556be5ac39 = $(`<div id="html_4841149ed8e230844cffa0556be5ac39" style="width: 100.0%; height: 100.0%;">     <b>Dr. Mohamed Bedaiwy</b><br>     City: Vancouver, BC<br>     Specialty: Fertility & Endometriosis<br>     Rating: 4.5⭐<br>     <a href="https://ubcgyn.ca/mohamed-bedaiwy" target="_blank">More Info</a>     </div>`)[0];
+            popup_062cc27c60decbd89317e0a676e2c5c0.setContent(html_4841149ed8e230844cffa0556be5ac39);
+        
+
+        marker_cabe08ec21630aa3d6c1c07a6318bd41.bindPopup(popup_062cc27c60decbd89317e0a676e2c5c0)
+        ;
+
+        
+    
+    
+            marker_cabe08ec21630aa3d6c1c07a6318bd41.bindTooltip(
+                `<div>
+                     Dr. Mohamed Bedaiwy
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a221cafada9766d58691efac40b17aec = L.marker(
+                [53.5461, -113.4938],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_5189077be8e92218e5630b3f7d43d4a6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_a221cafada9766d58691efac40b17aec.setIcon(icon_5189077be8e92218e5630b3f7d43d4a6);
+        
+    
+        var popup_62b3554882535f30c88ce8d7a0df008e = L.popup({"maxWidth": 300});
+
+        
+            var html_eb2e7c6c93f61744e96f52d65df73b6b = $(`<div id="html_eb2e7c6c93f61744e96f52d65df73b6b" style="width: 100.0%; height: 100.0%;">     <b>Dr. Crystal H. Chen</b><br>     City: Edmonton, AB<br>     Specialty: Laparoscopy<br>     Rating: 4.2⭐<br>     <a href="https://ualberta.ca/crystal-chen" target="_blank">More Info</a>     </div>`)[0];
+            popup_62b3554882535f30c88ce8d7a0df008e.setContent(html_eb2e7c6c93f61744e96f52d65df73b6b);
+        
+
+        marker_a221cafada9766d58691efac40b17aec.bindPopup(popup_62b3554882535f30c88ce8d7a0df008e)
+        ;
+
+        
+    
+    
+            marker_a221cafada9766d58691efac40b17aec.bindTooltip(
+                `<div>
+                     Dr. Crystal H. Chen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d4352618e74f3401bdc8cea5aabe171f = L.marker(
+                [43.2557, -79.8711],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_c58375c4dbaf067348ee8dc144f2f29f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_d4352618e74f3401bdc8cea5aabe171f.setIcon(icon_c58375c4dbaf067348ee8dc144f2f29f);
+        
+    
+        var popup_ce7afd4414877981c0694add438796f3 = L.popup({"maxWidth": 300});
+
+        
+            var html_648616a9c06af41b9451ce3221d3c17d = $(`<div id="html_648616a9c06af41b9451ce3221d3c17d" style="width: 100.0%; height: 100.0%;">     <b>Dr. Nicholas Leyland</b><br>     City: Hamilton, ON<br>     Specialty: MIGS & Education<br>     Rating: 4.6⭐<br>     <a href="https://mcmaster.ca/nicholas-leyland" target="_blank">More Info</a>     </div>`)[0];
+            popup_ce7afd4414877981c0694add438796f3.setContent(html_648616a9c06af41b9451ce3221d3c17d);
+        
+
+        marker_d4352618e74f3401bdc8cea5aabe171f.bindPopup(popup_ce7afd4414877981c0694add438796f3)
+        ;
+
+        
+    
+    
+            marker_d4352618e74f3401bdc8cea5aabe171f.bindTooltip(
+                `<div>
+                     Dr. Nicholas Leyland
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_19c313dccfb479687e43111b39e12621 = L.marker(
+                [45.4215, -75.6972],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_161ba7e08360b24d8ae9ee7d8e759423 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_19c313dccfb479687e43111b39e12621.setIcon(icon_161ba7e08360b24d8ae9ee7d8e759423);
+        
+    
+        var popup_54c2728ab3cb2bd9c5f8ba595b7314ea = L.popup({"maxWidth": 300});
+
+        
+            var html_6d3ebd4f64b2ca60fabcaa7ed3b439b5 = $(`<div id="html_6d3ebd4f64b2ca60fabcaa7ed3b439b5" style="width: 100.0%; height: 100.0%;">     <b>Dr. Danielle Martin</b><br>     City: Ottawa, ON<br>     Specialty: Policy & Women’s Health<br>     Rating: 4.1⭐<br>     <a href="https://womenscollegehospital.ca/danielle-martin" target="_blank">More Info</a>     </div>`)[0];
+            popup_54c2728ab3cb2bd9c5f8ba595b7314ea.setContent(html_6d3ebd4f64b2ca60fabcaa7ed3b439b5);
+        
+
+        marker_19c313dccfb479687e43111b39e12621.bindPopup(popup_54c2728ab3cb2bd9c5f8ba595b7314ea)
+        ;
+
+        
+    
+    
+            marker_19c313dccfb479687e43111b39e12621.bindTooltip(
+                `<div>
+                     Dr. Danielle Martin
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6e56ce9f1d3a56622646467a9cb289f3 = L.marker(
+                [45.9636, -66.6431],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_2c04fce35fdbdbcb591d729fd9049de2 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_6e56ce9f1d3a56622646467a9cb289f3.setIcon(icon_2c04fce35fdbdbcb591d729fd9049de2);
+        
+    
+        var popup_174f06e8d495c91fc00d43bf731506e2 = L.popup({"maxWidth": 300});
+
+        
+            var html_d1fe85c214afee315406ce4bc56e906d = $(`<div id="html_d1fe85c214afee315406ce4bc56e906d" style="width: 100.0%; height: 100.0%;">     <b>Dr. Leah Smith</b><br>     City: Fredericton, NB<br>     Specialty: Gynecologic Surgery<br>     Rating: 4.3⭐<br>     <a href="https://horizonnb.ca/leah-smith" target="_blank">More Info</a>     </div>`)[0];
+            popup_174f06e8d495c91fc00d43bf731506e2.setContent(html_d1fe85c214afee315406ce4bc56e906d);
+        
+
+        marker_6e56ce9f1d3a56622646467a9cb289f3.bindPopup(popup_174f06e8d495c91fc00d43bf731506e2)
+        ;
+
+        
+    
+    
+            marker_6e56ce9f1d3a56622646467a9cb289f3.bindTooltip(
+                `<div>
+                     Dr. Leah Smith
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_204e539b897e769e52c56dcbbf0df6f5 = L.marker(
+                [49.8879, -119.496],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_07578eacacf9cc19d74d4d0ac2d05ad4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purple", "prefix": "glyphicon"}
+            );
+            marker_204e539b897e769e52c56dcbbf0df6f5.setIcon(icon_07578eacacf9cc19d74d4d0ac2d05ad4);
+        
+    
+        var popup_3ef8b78758405d556760ca0d7abe7416 = L.popup({"maxWidth": 300});
+
+        
+            var html_f1ead0bc8f1d7c4e94670a692a249578 = $(`<div id="html_f1ead0bc8f1d7c4e94670a692a249578" style="width: 100.0%; height: 100.0%;">     <b>Dr. Tara MacGregor</b><br>     City: Kelowna, BC<br>     Specialty: Reproductive Health<br>     Rating: 4.0⭐<br>     <a href="https://interiorhealth.ca/tara-macgregor" target="_blank">More Info</a>     </div>`)[0];
+            popup_3ef8b78758405d556760ca0d7abe7416.setContent(html_f1ead0bc8f1d7c4e94670a692a249578);
+        
+
+        marker_204e539b897e769e52c56dcbbf0df6f5.bindPopup(popup_3ef8b78758405d556760ca0d7abe7416)
+        ;
+
+        
+    
+    
+            marker_204e539b897e769e52c56dcbbf0df6f5.bindTooltip(
+                `<div>
+                     Dr. Tara MacGregor
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b6f0af724845ab446eb2c5bd0413a807 = L.marker(
+                [43.6532, -79.3832],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_f73e3d1bde5703bd1f58eea8543523c8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_b6f0af724845ab446eb2c5bd0413a807.setIcon(icon_f73e3d1bde5703bd1f58eea8543523c8);
+        
+    
+        var popup_2cf200f98b26c409a3010c6f3f42843f = L.popup({"maxWidth": 300});
+
+        
+            var html_0a1b84f4f41be9861fe1253550fd709f = $(`<div id="html_0a1b84f4f41be9861fe1253550fd709f" style="width: 100.0%; height: 100.0%;">     <b>Sarah Thompson</b><br>     City: Toronto, ON<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.7⭐<br>     <a href="https://pelvicpttoronto.ca/sarah-thompson" target="_blank">More Info</a>     </div>`)[0];
+            popup_2cf200f98b26c409a3010c6f3f42843f.setContent(html_0a1b84f4f41be9861fe1253550fd709f);
+        
+
+        marker_b6f0af724845ab446eb2c5bd0413a807.bindPopup(popup_2cf200f98b26c409a3010c6f3f42843f)
+        ;
+
+        
+    
+    
+            marker_b6f0af724845ab446eb2c5bd0413a807.bindTooltip(
+                `<div>
+                     Sarah Thompson
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f9ba426e90459448e109275b434fbbc4 = L.marker(
+                [45.5017, -73.5673],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_e3692c3b5d26ed7653683709e03fd15e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_f9ba426e90459448e109275b434fbbc4.setIcon(icon_e3692c3b5d26ed7653683709e03fd15e);
+        
+    
+        var popup_8144fc429557e7e16b1a205d601f8133 = L.popup({"maxWidth": 300});
+
+        
+            var html_a62f06c2a3973ff7628a7a74b43ef6ce = $(`<div id="html_a62f06c2a3973ff7628a7a74b43ef6ce" style="width: 100.0%; height: 100.0%;">     <b>Jacques Bouchard</b><br>     City: Montreal, QC<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.5⭐<br>     <a href="https://physioqc.ca/jacques-bouchard" target="_blank">More Info</a>     </div>`)[0];
+            popup_8144fc429557e7e16b1a205d601f8133.setContent(html_a62f06c2a3973ff7628a7a74b43ef6ce);
+        
+
+        marker_f9ba426e90459448e109275b434fbbc4.bindPopup(popup_8144fc429557e7e16b1a205d601f8133)
+        ;
+
+        
+    
+    
+            marker_f9ba426e90459448e109275b434fbbc4.bindTooltip(
+                `<div>
+                     Jacques Bouchard
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ee1339b62d54e19ca16e73c1118c0607 = L.marker(
+                [49.2827, -123.1207],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_3aa48f88db6530cae70309b2ca2bd659 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_ee1339b62d54e19ca16e73c1118c0607.setIcon(icon_3aa48f88db6530cae70309b2ca2bd659);
+        
+    
+        var popup_6d9b794e7ac6129f8def4c7c0b527098 = L.popup({"maxWidth": 300});
+
+        
+            var html_a3552047cc71ea80f0d3aaac7825a1eb = $(`<div id="html_a3552047cc71ea80f0d3aaac7825a1eb" style="width: 100.0%; height: 100.0%;">     <b>Emily Chen</b><br>     City: Vancouver, BC<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.6⭐<br>     <a href="https://vancouverpelvic.ca/emily-chen" target="_blank">More Info</a>     </div>`)[0];
+            popup_6d9b794e7ac6129f8def4c7c0b527098.setContent(html_a3552047cc71ea80f0d3aaac7825a1eb);
+        
+
+        marker_ee1339b62d54e19ca16e73c1118c0607.bindPopup(popup_6d9b794e7ac6129f8def4c7c0b527098)
+        ;
+
+        
+    
+    
+            marker_ee1339b62d54e19ca16e73c1118c0607.bindTooltip(
+                `<div>
+                     Emily Chen
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d5bd0bdc5c60ccadd51653b79ccf1a47 = L.marker(
+                [44.6488, -63.5752],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_96f0b579015051b419144a6b23470eaf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d5bd0bdc5c60ccadd51653b79ccf1a47.setIcon(icon_96f0b579015051b419144a6b23470eaf);
+        
+    
+        var popup_4275c2568119f087a2530c7bb39452f2 = L.popup({"maxWidth": 300});
+
+        
+            var html_63b22895708408e621a947aecec95da2 = $(`<div id="html_63b22895708408e621a947aecec95da2" style="width: 100.0%; height: 100.0%;">     <b>Rachel MacDonald</b><br>     City: Halifax, NS<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.4⭐<br>     <a href="https://halifaxpt.ca/rachel-macdonald" target="_blank">More Info</a>     </div>`)[0];
+            popup_4275c2568119f087a2530c7bb39452f2.setContent(html_63b22895708408e621a947aecec95da2);
+        
+
+        marker_d5bd0bdc5c60ccadd51653b79ccf1a47.bindPopup(popup_4275c2568119f087a2530c7bb39452f2)
+        ;
+
+        
+    
+    
+            marker_d5bd0bdc5c60ccadd51653b79ccf1a47.bindTooltip(
+                `<div>
+                     Rachel MacDonald
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_df974f4ce77acc4155046a74bba02858 = L.marker(
+                [51.0447, -114.0719],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_a5bb6d796d65af52f37b9c898ab46347 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_df974f4ce77acc4155046a74bba02858.setIcon(icon_a5bb6d796d65af52f37b9c898ab46347);
+        
+    
+        var popup_3e739fb8c4aee363796c5413110bd95c = L.popup({"maxWidth": 300});
+
+        
+            var html_57170a1f0bc908ac1b5dd5a417f0dd29 = $(`<div id="html_57170a1f0bc908ac1b5dd5a417f0dd29" style="width: 100.0%; height: 100.0%;">     <b>Amanpreet Kaur</b><br>     City: Calgary, AB<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.3⭐<br>     <a href="https://calgarypelvichealth.ca/amanpreet-kaur" target="_blank">More Info</a>     </div>`)[0];
+            popup_3e739fb8c4aee363796c5413110bd95c.setContent(html_57170a1f0bc908ac1b5dd5a417f0dd29);
+        
+
+        marker_df974f4ce77acc4155046a74bba02858.bindPopup(popup_3e739fb8c4aee363796c5413110bd95c)
+        ;
+
+        
+    
+    
+            marker_df974f4ce77acc4155046a74bba02858.bindTooltip(
+                `<div>
+                     Amanpreet Kaur
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b74e263116ae39ffe0f615684b95e02a = L.marker(
+                [49.8951, -97.1384],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_a529b4de7456c71b4b3968a3c30e7ec4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_b74e263116ae39ffe0f615684b95e02a.setIcon(icon_a529b4de7456c71b4b3968a3c30e7ec4);
+        
+    
+        var popup_045d1c85d6e1464b5399806d6ca47652 = L.popup({"maxWidth": 300});
+
+        
+            var html_4b68335082e1c2ddfdecbb4d6979d0ce = $(`<div id="html_4b68335082e1c2ddfdecbb4d6979d0ce" style="width: 100.0%; height: 100.0%;">     <b>Chloe Bennett</b><br>     City: Winnipeg, MB<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.2⭐<br>     <a href="https://winnipegphysio.ca/chloe-bennett" target="_blank">More Info</a>     </div>`)[0];
+            popup_045d1c85d6e1464b5399806d6ca47652.setContent(html_4b68335082e1c2ddfdecbb4d6979d0ce);
+        
+
+        marker_b74e263116ae39ffe0f615684b95e02a.bindPopup(popup_045d1c85d6e1464b5399806d6ca47652)
+        ;
+
+        
+    
+    
+            marker_b74e263116ae39ffe0f615684b95e02a.bindTooltip(
+                `<div>
+                     Chloe Bennett
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b821083df5030f265894d2f636e146ac = L.marker(
+                [46.2382, -63.1311],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_410caef11feab001ea09ec620a83b0ef = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_b821083df5030f265894d2f636e146ac.setIcon(icon_410caef11feab001ea09ec620a83b0ef);
+        
+    
+        var popup_01a77cbf66a87ebf9154e6629d8c208d = L.popup({"maxWidth": 300});
+
+        
+            var html_8bb68aa093db1b7fa14ffa4ae358d1d7 = $(`<div id="html_8bb68aa093db1b7fa14ffa4ae358d1d7" style="width: 100.0%; height: 100.0%;">     <b>Tara Jean Lafferty</b><br>     City: Charlottetown, PE<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.5⭐<br>     <a href="https://peiphysio.ca/tara-jean-lafferty" target="_blank">More Info</a>     </div>`)[0];
+            popup_01a77cbf66a87ebf9154e6629d8c208d.setContent(html_8bb68aa093db1b7fa14ffa4ae358d1d7);
+        
+
+        marker_b821083df5030f265894d2f636e146ac.bindPopup(popup_01a77cbf66a87ebf9154e6629d8c208d)
+        ;
+
+        
+    
+    
+            marker_b821083df5030f265894d2f636e146ac.bindTooltip(
+                `<div>
+                     Tara Jean Lafferty
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2d0f96ec431f7f9d22b626b8d3dac7cb = L.marker(
+                [47.5615, -52.7126],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_31ce0e43f6e1622568cf184ad5e55a6d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_2d0f96ec431f7f9d22b626b8d3dac7cb.setIcon(icon_31ce0e43f6e1622568cf184ad5e55a6d);
+        
+    
+        var popup_598b4c63f3779dc4f851e27768ebdf45 = L.popup({"maxWidth": 300});
+
+        
+            var html_faac3547c18abd6589bd20d5f2fd9118 = $(`<div id="html_faac3547c18abd6589bd20d5f2fd9118" style="width: 100.0%; height: 100.0%;">     <b>Julie Simmonds</b><br>     City: St. John's, NL<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.3⭐<br>     <a href="https://nlpelvichealth.ca/julie-simmonds" target="_blank">More Info</a>     </div>`)[0];
+            popup_598b4c63f3779dc4f851e27768ebdf45.setContent(html_faac3547c18abd6589bd20d5f2fd9118);
+        
+
+        marker_2d0f96ec431f7f9d22b626b8d3dac7cb.bindPopup(popup_598b4c63f3779dc4f851e27768ebdf45)
+        ;
+
+        
+    
+    
+            marker_2d0f96ec431f7f9d22b626b8d3dac7cb.bindTooltip(
+                `<div>
+                     Julie Simmonds
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a9711d373aeddfe3fa9a56a0a330182b = L.marker(
+                [60.7212, -135.0568],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_a16203f9140bb60ada272f5e1f2f3e67 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_a9711d373aeddfe3fa9a56a0a330182b.setIcon(icon_a16203f9140bb60ada272f5e1f2f3e67);
+        
+    
+        var popup_51a3c4b4d1e8e0633bc1800ce2096d5c = L.popup({"maxWidth": 300});
+
+        
+            var html_a9e21fa9e46c773922333428fb716bd7 = $(`<div id="html_a9e21fa9e46c773922333428fb716bd7" style="width: 100.0%; height: 100.0%;">     <b>Meghan Delaney</b><br>     City: Whitehorse, YT<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.4⭐<br>     <a href="https://whitehorsephysio.ca/meghan-delaney" target="_blank">More Info</a>     </div>`)[0];
+            popup_51a3c4b4d1e8e0633bc1800ce2096d5c.setContent(html_a9e21fa9e46c773922333428fb716bd7);
+        
+
+        marker_a9711d373aeddfe3fa9a56a0a330182b.bindPopup(popup_51a3c4b4d1e8e0633bc1800ce2096d5c)
+        ;
+
+        
+    
+    
+            marker_a9711d373aeddfe3fa9a56a0a330182b.bindTooltip(
+                `<div>
+                     Meghan Delaney
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ff9fdbfc11f266eea78c6b7d97991d7d = L.marker(
+                [46.8139, -71.2082],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_650e15b2717fc1c58ade079cb7648ea5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_ff9fdbfc11f266eea78c6b7d97991d7d.setIcon(icon_650e15b2717fc1c58ade079cb7648ea5);
+        
+    
+        var popup_3681d6082c1ce5c784097e7e3233812c = L.popup({"maxWidth": 300});
+
+        
+            var html_a9fff0313b51c3e05d25a58a7a940aa9 = $(`<div id="html_a9fff0313b51c3e05d25a58a7a940aa9" style="width: 100.0%; height: 100.0%;">     <b>Isabelle Tremblay</b><br>     City: Quebec City, QC<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.6⭐<br>     <a href="https://physioquebec.ca/isabelle-tremblay" target="_blank">More Info</a>     </div>`)[0];
+            popup_3681d6082c1ce5c784097e7e3233812c.setContent(html_a9fff0313b51c3e05d25a58a7a940aa9);
+        
+
+        marker_ff9fdbfc11f266eea78c6b7d97991d7d.bindPopup(popup_3681d6082c1ce5c784097e7e3233812c)
+        ;
+
+        
+    
+    
+            marker_ff9fdbfc11f266eea78c6b7d97991d7d.bindTooltip(
+                `<div>
+                     Isabelle Tremblay
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1c16a58658686ba7e57ebe729b64c850 = L.marker(
+                [52.1332, -106.67],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_545dc429203e08642bc2f4b15152fe6d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_1c16a58658686ba7e57ebe729b64c850.setIcon(icon_545dc429203e08642bc2f4b15152fe6d);
+        
+    
+        var popup_236cd841353d8154b54777402b10c4b9 = L.popup({"maxWidth": 300});
+
+        
+            var html_d94cfd3da5484d0d4631147507a2b159 = $(`<div id="html_d94cfd3da5484d0d4631147507a2b159" style="width: 100.0%; height: 100.0%;">     <b>Danielle Scott</b><br>     City: Saskatoon, SK<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.2⭐<br>     <a href="https://saskatoonpelvic.ca/danielle-scott" target="_blank">More Info</a>     </div>`)[0];
+            popup_236cd841353d8154b54777402b10c4b9.setContent(html_d94cfd3da5484d0d4631147507a2b159);
+        
+
+        marker_1c16a58658686ba7e57ebe729b64c850.bindPopup(popup_236cd841353d8154b54777402b10c4b9)
+        ;
+
+        
+    
+    
+            marker_1c16a58658686ba7e57ebe729b64c850.bindTooltip(
+                `<div>
+                     Danielle Scott
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_16192ff8cedb6466d52aa77805382d8d = L.marker(
+                [50.4452, -104.6189],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_6776695e0fbebc178bd1685415e64118 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_16192ff8cedb6466d52aa77805382d8d.setIcon(icon_6776695e0fbebc178bd1685415e64118);
+        
+    
+        var popup_a3f25ab964d5a3c2145252677b280133 = L.popup({"maxWidth": 300});
+
+        
+            var html_8b43c494abd33fd92702340dd55f2c88 = $(`<div id="html_8b43c494abd33fd92702340dd55f2c88" style="width: 100.0%; height: 100.0%;">     <b>Linda Huang</b><br>     City: Regina, SK<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.1⭐<br>     <a href="https://reginaphysio.ca/linda-huang" target="_blank">More Info</a>     </div>`)[0];
+            popup_a3f25ab964d5a3c2145252677b280133.setContent(html_8b43c494abd33fd92702340dd55f2c88);
+        
+
+        marker_16192ff8cedb6466d52aa77805382d8d.bindPopup(popup_a3f25ab964d5a3c2145252677b280133)
+        ;
+
+        
+    
+    
+            marker_16192ff8cedb6466d52aa77805382d8d.bindTooltip(
+                `<div>
+                     Linda Huang
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8152cdc939adaf267b7e9f929def362b = L.marker(
+                [63.7467, -68.5167],
+                {}
+            ).addTo(marker_cluster_19031744da6ab074d723bf93b7403c42);
+        
+    
+            var icon_86cf75614ca89824f84625a1cdc75d30 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_8152cdc939adaf267b7e9f929def362b.setIcon(icon_86cf75614ca89824f84625a1cdc75d30);
+        
+    
+        var popup_785692790c3928f360168535c5a97d51 = L.popup({"maxWidth": 300});
+
+        
+            var html_b4f9eeacfd02df8788ccc94c12139270 = $(`<div id="html_b4f9eeacfd02df8788ccc94c12139270" style="width: 100.0%; height: 100.0%;">     <b>Sophie Caron</b><br>     City: Iqaluit, NU<br>     Specialty: Pelvic Physiotherapy<br>     Rating: 4.0⭐<br>     <a href="https://nunavutphysio.ca/sophie-caron" target="_blank">More Info</a>     </div>`)[0];
+            popup_785692790c3928f360168535c5a97d51.setContent(html_b4f9eeacfd02df8788ccc94c12139270);
+        
+
+        marker_8152cdc939adaf267b7e9f929def362b.bindPopup(popup_785692790c3928f360168535c5a97d51)
+        ;
+
+        
+    
+    
+            marker_8152cdc939adaf267b7e9f929def362b.bindTooltip(
+                `<div>
+                     Sophie Caron
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>
